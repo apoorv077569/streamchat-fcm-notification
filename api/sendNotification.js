@@ -35,15 +35,17 @@ export default async (req, res) => {
     const projectId = process.env.FIREBASE_PROJECT_ID;
     const accessToken = await getAccessToken();
 
+    // ---- FIX: DATA-ONLY PAYLOAD --------
     const payload = {
       message: {
         token: receiverToken,
-        notification: {
+        data: {
           title,
           body: msgBody,
-        },
-        data: data || {},
-      },
+          ...(data || {}),
+          type: "chat"
+        }
+      }
     };
 
     const response = await fetch(
