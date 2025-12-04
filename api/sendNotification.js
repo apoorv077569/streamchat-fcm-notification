@@ -40,12 +40,12 @@ export default async (req, res) => {
       message: {
         token: receiverToken,
         data: {
-          title,
+          title: title,
           body: msgBody,
           ...(data || {}),
-          type: "chat"
-        }
-      }
+          type: "chat",
+        },
+      },
     };
 
     const response = await fetch(
